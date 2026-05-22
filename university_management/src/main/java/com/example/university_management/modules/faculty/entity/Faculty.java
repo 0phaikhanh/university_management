@@ -1,6 +1,7 @@
 package com.example.university_management.modules.faculty.entity;
 
 import com.example.university_management.modules.Major.Entity.Major;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +23,7 @@ public class Faculty {
     @Column(name = "faculty_name", nullable = false)
     private String facultyName;
 
-    @OneToOne(mappedBy = "faclty_id")
+    @OneToMany(mappedBy = "faculty")
+    @JsonIgnore
     private List<Major> major;
 }

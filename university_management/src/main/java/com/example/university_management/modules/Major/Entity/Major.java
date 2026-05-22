@@ -23,5 +23,5 @@ public class Major {
 
     @ManyToOne
     @JoinColumn(name = "faculty_id")
-    private Faculty facultyId;
+    private Faculty faculty;
 }

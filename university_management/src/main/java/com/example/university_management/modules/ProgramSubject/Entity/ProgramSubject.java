@@ -17,6 +17,7 @@ public class ProgramSubject {
     private ProgramSubjectId id;
 
     @ManyToOne
+    @MapsId("subjectId")
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
