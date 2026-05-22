@@ -23,7 +23,6 @@ public class FacultyController {
     public ResponseEntity<FacultyResponse> create(
             @Valid @RequestBody CreateFacultyRequest request
     ) {
-
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(facultyService.create(request));
     }

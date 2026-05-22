@@ -22,6 +22,7 @@ public class FacultyServiceImpl implements FacultyService {
 
     private final FacultyMapper facultyMapper;
 
+
     @Override
     public FacultyResponse create(CreateFacultyRequest request) {
 
