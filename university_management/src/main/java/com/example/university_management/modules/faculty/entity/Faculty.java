@@ -1,6 +1,6 @@
 package com.example.university_management.modules.faculty.entity;
 
-import com.example.university_management.modules.major.Entity.Major;
+import com.example.university_management.modules.Major.Entity.Major;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,4 +1,4 @@
-package com.example.university_management.modules.major.Entity;
+package com.example.university_management.modules.Major.Entity;
 
 import com.example.university_management.modules.faculty.entity.Faculty;
 import jakarta.persistence.*;

@@ -1,7 +1,7 @@
-package com.example.university_management.modules.major.Controller;
+package com.example.university_management.modules.Major.Controller;
 
-import com.example.university_management.modules.major.Entity.Major;
-import com.example.university_management.modules.major.Repository.MajorRepository;
+import com.example.university_management.modules.Major.Entity.Major;
+import com.example.university_management.modules.Major.Repository.MajorRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
