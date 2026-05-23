@@ -1,8 +1,10 @@
 package com.example.university_management.modules.student.controller;
 
+import com.example.university_management.modules.student.dto.StudentRequestDTO;
 import com.example.university_management.modules.student.entity.Student;
 import com.example.university_management.modules.student.service.StudentService;
 import com.example.university_management.modules.student.common.ApiResponse;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,14 +31,14 @@ public class StudentController {
     }
 
     @PostMapping
-    public ApiResponse<Student> create(@RequestBody Student student) {
-        Student createdStudent = studentService.createStudent(student);
+    public ApiResponse<Student> create(@Valid @RequestBody StudentRequestDTO dto) {
+        Student createdStudent = studentService.createStudent(dto);
         return new ApiResponse<>("Create student successfully", createdStudent);
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<Student> update(@PathVariable String id, @RequestBody Student student) {
-        Student updatedStudent = studentService.updateStudent(id, student);
+    public ApiResponse<Student> update(@PathVariable String id, @Valid @RequestBody StudentRequestDTO dto) {
+        Student updatedStudent = studentService.updateStudent(id, dto);
         return new ApiResponse<>("Update student successfully", updatedStudent);
     }
 

@@ -5,13 +5,11 @@ import lombok.*;
 
 @Entity
 @Table(name = "admin_class")
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class AdminClass {
 
     @Id
