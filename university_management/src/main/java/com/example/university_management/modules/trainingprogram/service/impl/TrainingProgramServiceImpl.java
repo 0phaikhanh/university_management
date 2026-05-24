@@ -1,5 +1,6 @@
 package com.example.university_management.modules.trainingprogram.service.impl;
 
+import com.example.university_management.exeption.NotFoundException;
 import com.example.university_management.modules.trainingprogram.dto.TrainingProgramRequestDTO;
 import com.example.university_management.modules.trainingprogram.entity.TrainingProgram;
 import com.example.university_management.modules.trainingprogram.repository.TrainingProgramRepository;
@@ -9,7 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TrainingProgramServiceImpl implements TrainingProgramService {
+public class
+TrainingProgramServiceImpl implements TrainingProgramService {
 
     private final TrainingProgramRepository trainingProgramRepository;
 
@@ -25,7 +27,7 @@ public class TrainingProgramServiceImpl implements TrainingProgramService {
     @Override
     public TrainingProgram getProgramById(String id) {
         return trainingProgramRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy chương trình đào tạo với ID: " + id));
+                .orElseThrow(() -> new NotFoundException("Không tìm thấy chương trình đào tạo với ID: " + id));
     }
 
     @Override
@@ -49,7 +51,7 @@ public class TrainingProgramServiceImpl implements TrainingProgramService {
     @Override
     public TrainingProgram updateProgram(String id, TrainingProgramRequestDTO dto) {
         TrainingProgram existing = trainingProgramRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy chương trình đào tạo để cập nhật!"));
+                .orElseThrow(() -> new NotFoundException("Không tìm thấy chương trình đào tạo để cập nhật!"));
 
         existing.setMajorId(dto.getMajorId());
         existing.setProgramName(dto.getProgramName());
@@ -61,7 +63,7 @@ public class TrainingProgramServiceImpl implements TrainingProgramService {
     @Override
     public void deleteProgram(String id) {
         TrainingProgram existing = trainingProgramRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy chương trình đào tạo để xóa!"));
+                .orElseThrow(() -> new NotFoundException("Không tìm thấy chương trình đào tạo để xóa!"));
         trainingProgramRepository.delete(existing);
     }
 }
