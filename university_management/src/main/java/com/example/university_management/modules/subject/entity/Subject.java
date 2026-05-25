@@ -1,6 +1,6 @@
 package com.example.university_management.modules.subject.entity;
 
-import com.example.university_management.modules.program_subject.entity.ProgramSubject;
+//import com.example.university_management.modules.program_subject.entity.ProgramSubject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,7 +30,7 @@ public class Subject {
     @Column(name = "practice_credits", length = 11)
     private Integer practiceCredits;
 
-    @OneToMany(mappedBy = "subject")
-    @JsonIgnore
-    private List<ProgramSubject> programSubject;
+//    @OneToMany(mappedBy = "subject")
+//    @JsonIgnore
+//    private List<ProgramSubject> programSubject;
 }
