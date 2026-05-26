@@ -10,22 +10,22 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class SemesterRequestDTO {
-    @NotBlank(message = "Mã học kỳ không được để trống")
-    @Size(max = 50, message = "Mã học kỳ tối đa 50 ký tự")
+    @NotBlank(message = "Semester ID is required")
+    @Size(max = 50, message = "Semester ID must not exceed 50 characters")
     private String semesterId;
 
-    @NotBlank(message = "Năm học không được để trống")
-    @Size(max = 20, message = "Năm học tối đa 20 ký tự (VD: 2023-2024)")
+    @NotBlank(message = "Academic year is required")
+    @Size(max = 20, message = "Academic year must not exceed 20 characters, for example 2023-2024")
     private String academicYear;
 
-    @NotNull(message = "Học kỳ (số) không được để trống")
-    @Min(value = 1, message = "Học kỳ nhỏ nhất là 1")
-    @Max(value = 3, message = "Học kỳ lớn nhất là 3") // Thường 1 năm có tối đa 3 kỳ (kỳ Hè là 3)
+    @NotNull(message = "Semester number is required")
+    @Min(value = 1, message = "Semester number must be at least 1")
+    @Max(value = 3, message = "Semester number must be at most 3") // Usually an academic year has at most 3 semesters; summer is 3
     private Integer semesterNumber;
 
-    @NotNull(message = "Ngày bắt đầu không được để trống")
+    @NotNull(message = "Start date is required")
     private LocalDate startDate;
 
-    @NotNull(message = "Ngày kết thúc không được để trống")
+    @NotNull(message = "End date is required")
     private LocalDate endDate;
 }

@@ -13,17 +13,17 @@ import java.time.LocalDate;
 @Builder
 public class ClassAdvisorRequestDTO {
 
-    @NotBlank(message = "Mã lớp không được để trống")
-    @Size(max = 50, message = "Mã lớp tối đa 50 ký tự")
+    @NotBlank(message = "Class ID is required")
+    @Size(max = 50, message = "Class ID must not exceed 50 characters")
     private String classId;
 
-    @NotBlank(message = "Mã giảng viên không được để trống")
-    @Size(max = 50, message = "Mã giảng viên tối đa 50 ký tự")
+    @NotBlank(message = "Lecturer ID is required")
+    @Size(max = 50, message = "Lecturer ID must not exceed 50 characters")
     private String lecturerId;
 
-    @NotNull(message = "Ngày bắt đầu không được để trống")
+    @NotNull(message = "Start date is required")
     private LocalDate startDate;
 
-    @NotNull(message = "Ngày kết thúc không được để trống")
+    @NotNull(message = "End date is required")
     private LocalDate endDate;
 }

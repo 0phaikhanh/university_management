@@ -25,7 +25,7 @@ public class ClassAdvisorServiceImpl implements ClassAdvisorService {
     @Override
     public ClassAdvisor getAdvisorById(Long id) {
         return classAdvisorRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy cố vấn học tập với ID: " + id));
+                .orElseThrow(() -> new NotFoundException("Class advisor not found with ID: " + id));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ClassAdvisorServiceImpl implements ClassAdvisorService {
     @Override
     public ClassAdvisor updateAdvisor(Long id, ClassAdvisorRequestDTO dto) {
         ClassAdvisor existing = classAdvisorRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy cố vấn học tập để cập nhật!"));
+                .orElseThrow(() -> new NotFoundException("Class advisor to update was not found!"));
 
         existing.setClassId(dto.getClassId());
         existing.setLecturerId(dto.getLecturerId());
@@ -55,7 +55,7 @@ public class ClassAdvisorServiceImpl implements ClassAdvisorService {
     @Override
     public void deleteAdvisor(Long id) {
         ClassAdvisor existing = classAdvisorRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy cố vấn học tập để xóa!"));
+                .orElseThrow(() -> new NotFoundException("Class advisor to delete was not found!"));
         classAdvisorRepository.delete(existing);
     }
 }

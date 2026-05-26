@@ -3,7 +3,7 @@ package com.example.university_management.modules.student.controller;
 import com.example.university_management.modules.student.dto.StudentRequestDTO;
 import com.example.university_management.modules.student.entity.Student;
 import com.example.university_management.modules.student.service.StudentService;
-import com.example.university_management.modules.student.common.ApiResponse;
+import com.example.university_management.common.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 

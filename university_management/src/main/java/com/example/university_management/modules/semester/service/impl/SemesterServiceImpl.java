@@ -25,18 +25,18 @@ public class SemesterServiceImpl implements SemesterService {
     @Override
     public Semester getSemesterById(String id) {
         return semesterRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy học kỳ với ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Semester not found with ID: " + id));
     }
 
     @Override
     public Semester createSemester(SemesterRequestDTO dto) {
         if (semesterRepository.existsById(dto.getSemesterId())) {
-            throw new RuntimeException("Mã học kỳ đã tồn tại!");
+            throw new RuntimeException("Semester ID already exists!");
         }
 
-        // Kiểm tra logic ngày tháng: Ngày kết thúc phải sau ngày bắt đầu
+        // Validate date logic: end date must be after start date
         if (dto.getEndDate().isBefore(dto.getStartDate())) {
-            throw new RuntimeException("Ngày kết thúc phải sau ngày bắt đầu!");
+            throw new RuntimeException("End date must be after start date!");
         }
 
         Semester semester = Semester.builder()
@@ -53,11 +53,11 @@ public class SemesterServiceImpl implements SemesterService {
     @Override
     public Semester updateSemester(String id, SemesterRequestDTO dto) {
         Semester existing = semesterRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy học kỳ để cập nhật!"));
+                .orElseThrow(() -> new RuntimeException("Semester to update was not found!"));
 
-        // Kiểm tra logic ngày tháng
+        // Validate date logic
         if (dto.getEndDate().isBefore(dto.getStartDate())) {
-            throw new RuntimeException("Ngày kết thúc phải sau ngày bắt đầu!");
+            throw new RuntimeException("End date must be after start date!");
         }
 
         existing.setAcademicYear(dto.getAcademicYear());
@@ -71,7 +71,7 @@ public class SemesterServiceImpl implements SemesterService {
     @Override
     public void deleteSemester(String id) {
         Semester existing = semesterRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy học kỳ để xóa!"));
+                .orElseThrow(() -> new RuntimeException("Semester to delete was not found!"));
         semesterRepository.delete(existing);
     }
 }

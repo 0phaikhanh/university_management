@@ -10,20 +10,20 @@ import lombok.*;
 @Builder
 public class BehavioralScoreRequestDTO {
 
-    @NotBlank(message = "Mã sinh viên không được để trống")
-    @Size(max = 50, message = "Mã sinh viên tối đa 50 ký tự")
+    @NotBlank(message = "Student ID is required")
+    @Size(max = 50, message = "Student ID must not exceed 50 characters")
     private String studentId;
 
-    @NotBlank(message = "Mã học kỳ không được để trống")
-    @Size(max = 50, message = "Mã học kỳ tối đa 50 ký tự")
+    @NotBlank(message = "Semester ID is required")
+    @Size(max = 50, message = "Semester ID must not exceed 50 characters")
     private String semesterId;
 
-    @NotNull(message = "Điểm rèn luyện không được để trống")
-    @Min(value = 0, message = "Điểm rèn luyện thấp nhất là 0")
-    @Max(value = 100, message = "Điểm rèn luyện cao nhất là 100")
+    @NotNull(message = "Behavioral score is required")
+    @Min(value = 0, message = "Behavioral score must be at least 0")
+    @Max(value = 100, message = "Behavioral score must be at most 100")
     private Integer totalPoints;
 
-    @NotBlank(message = "Xếp loại không được để trống")
-    @Size(max = 50, message = "Xếp loại tối đa 50 ký tự")
+    @NotBlank(message = "Classification is required")
+    @Size(max = 50, message = "Classification must not exceed 50 characters")
     private String classification;
 }

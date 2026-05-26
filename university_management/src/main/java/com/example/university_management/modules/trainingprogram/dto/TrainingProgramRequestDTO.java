@@ -10,19 +10,19 @@ import lombok.*;
 @Builder
 public class TrainingProgramRequestDTO {
 
-    @NotBlank(message = "Mã chương trình đào tạo không được để trống")
-    @Size(max = 50, message = "Mã chương trình đào tạo tối đa 50 ký tự")
+    @NotBlank(message = "Training program ID is required")
+    @Size(max = 50, message = "Training program ID must not exceed 50 characters")
     private String programId;
 
-    @NotBlank(message = "Mã ngành không được để trống")
-    @Size(max = 50, message = "Mã ngành tối đa 50 ký tự")
+    @NotBlank(message = "Major ID is required")
+    @Size(max = 50, message = "Major ID must not exceed 50 characters")
     private String majorId;
 
-    @NotBlank(message = "Tên chương trình đào tạo không được để trống")
-    @Size(max = 255, message = "Tên chương trình đào tạo tối đa 255 ký tự")
+    @NotBlank(message = "Training program name is required")
+    @Size(max = 255, message = "Training program name must not exceed 255 characters")
     private String programName;
 
-    @NotNull(message = "Số tín chỉ yêu cầu tốt nghiệp không được để trống")
-    @Min(value = 1, message = "Số tín chỉ yêu cầu tốt nghiệp phải lớn hơn 0")
+    @NotNull(message = "Required graduation credits are required")
+    @Min(value = 1, message = "Required graduation credits must be greater than 0")
     private Integer requiredCreditsToGraduate;
 }

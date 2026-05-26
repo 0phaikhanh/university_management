@@ -11,37 +11,37 @@ import java.time.LocalDate;
 @Builder
 public class StudentRequestDTO {
 
-    @NotBlank(message = "Mã sinh viên không được để trống")
-    @Size(max = 50, message = "Mã sinh viên tối đa 50 ký tự")
+    @NotBlank(message = "Student ID is required")
+    @Size(max = 50, message = "Student ID must not exceed 50 characters")
     private String studentId;
 
-    @NotBlank(message = "Tên sinh viên không được để trống")
-    @Size(max = 255, message = "Tên sinh viên tối đa 255 ký tự")
+    @NotBlank(message = "Student name is required")
+    @Size(max = 255, message = "Student name must not exceed 255 characters")
     private String fullName;
 
-    @NotNull(message = "Ngày sinh không được để trống")
-    @Past(message = "Ngày sinh phải là một ngày trong quá khứ")
+    @NotNull(message = "Date of birth is required")
+    @Past(message = "Date of birth must be in the past")
     private LocalDate dateOfBirth;
 
-    @NotBlank(message = "Giới tính không được để trống")
-    @Size(max = 10, message = "Giới tính tối đa 10 ký tự")
+    @NotBlank(message = "Gender is required")
+    @Size(max = 10, message = "Gender must not exceed 10 characters")
     private String gender;
 
-    @NotBlank(message = "Email không được để trống")
-    @Email(message = "Email không đúng định dạng")
-    @Size(max = 255, message = "Email tối đa 255 ký tự")
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email format is invalid")
+    @Size(max = 255, message = "Email must not exceed 255 characters")
     private String email;
 
-    @NotBlank(message = "Số điện thoại không được để trống")
-    @Size(max = 20, message = "Số điện thoại tối đa 20 ký tự")
-    @Pattern(regexp = "^[0-9]*$", message = "Số điện thoại chỉ chứa các ký tự số")
+    @NotBlank(message = "Phone number is required")
+    @Size(max = 20, message = "Phone number must not exceed 20 characters")
+    @Pattern(regexp = "^[0-9]*$", message = "Phone number must contain digits only")
     private String phone;
 
-    @NotBlank(message = "Mã lớp hành chính không được để trống")
-    @Size(max = 50, message = "Mã lớp tối đa 50 ký tự")
+    @NotBlank(message = "Admin class ID is required")
+    @Size(max = 50, message = "Class ID must not exceed 50 characters")
     private String classId;
 
-    @NotBlank(message = "Trạng thái học tập không được để trống")
-    @Size(max = 50, message = "Trạng thái học tập tối đa 50 ký tự")
+    @NotBlank(message = "Academic status is required")
+    @Size(max = 50, message = "Academic status must not exceed 50 characters")
     private String academicStatus;
 }

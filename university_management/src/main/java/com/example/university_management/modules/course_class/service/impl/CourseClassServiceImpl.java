@@ -25,13 +25,13 @@ public class CourseClassServiceImpl implements CourseClassService {
     @Override
     public CourseClass getCourseClassById(String id) {
         return courseClassRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy lớp học phần với ID: " + id));
+                .orElseThrow(() -> new NotFoundException("Course class not found with ID: " + id));
     }
 
     @Override
     public CourseClass createCourseClass(CourseClassRequestDTO dto) {
         if (courseClassRepository.existsById(dto.getCourseClassId())) {
-            throw new RuntimeException("Mã lớp học phần đã tồn tại!");
+            throw new RuntimeException("Course class ID already exists!");
         }
 
         CourseClass courseClass = CourseClass.builder()
@@ -50,7 +50,7 @@ public class CourseClassServiceImpl implements CourseClassService {
     @Override
     public CourseClass updateCourseClass(String id, CourseClassRequestDTO dto) {
         CourseClass existing = courseClassRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy lớp học phần để cập nhật!"));
+                .orElseThrow(() -> new NotFoundException("Course class to update was not found!"));
 
         existing.setSubjectId(dto.getSubjectId());
         existing.setSemesterId(dto.getSemesterId());
@@ -65,7 +65,7 @@ public class CourseClassServiceImpl implements CourseClassService {
     @Override
     public void deleteCourseClass(String id) {
         CourseClass existing = courseClassRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy lớp học phần để xóa!"));
+                .orElseThrow(() -> new NotFoundException("Course class to delete was not found!"));
         courseClassRepository.delete(existing);
     }
 }

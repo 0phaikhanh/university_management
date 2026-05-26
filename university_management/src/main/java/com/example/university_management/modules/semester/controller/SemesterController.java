@@ -1,6 +1,6 @@
 package com.example.university_management.modules.semester.controller;
 
-import com.example.university_management.modules.semester.common.ApiResponse;
+import com.example.university_management.common.ApiResponse;
 import com.example.university_management.modules.semester.dto.SemesterRequestDTO;
 import com.example.university_management.modules.semester.entity.Semester;
 import com.example.university_management.modules.semester.service.SemesterService;
@@ -22,27 +22,27 @@ public class SemesterController {
 
     @GetMapping
     public ApiResponse<List<Semester>> getAll() {
-        return new ApiResponse<>("Lấy danh sách học kỳ thành công", semesterService.getAllSemesters());
+        return new ApiResponse<>("Semesters retrieved successfully", semesterService.getAllSemesters());
     }
 
     @GetMapping("/{id}")
     public ApiResponse<Semester> getById(@PathVariable String id) {
-        return new ApiResponse<>("Lấy thông tin học kỳ thành công", semesterService.getSemesterById(id));
+        return new ApiResponse<>("Semester retrieved successfully", semesterService.getSemesterById(id));
     }
 
     @PostMapping
     public ApiResponse<Semester> create(@Valid @RequestBody SemesterRequestDTO dto) {
-        return new ApiResponse<>("Thêm học kỳ thành công", semesterService.createSemester(dto));
+        return new ApiResponse<>("Semester created successfully", semesterService.createSemester(dto));
     }
 
     @PutMapping("/{id}")
     public ApiResponse<Semester> update(@PathVariable String id, @Valid @RequestBody SemesterRequestDTO dto) {
-        return new ApiResponse<>("Cập nhật học kỳ thành công", semesterService.updateSemester(id, dto));
+        return new ApiResponse<>("Semester updated successfully", semesterService.updateSemester(id, dto));
     }
 
     @DeleteMapping("/{id}")
     public ApiResponse<String> delete(@PathVariable String id) {
         semesterService.deleteSemester(id);
-        return new ApiResponse<>("Xóa học kỳ thành công", null);
+        return new ApiResponse<>("Semester deleted successfully", null);
     }
 }

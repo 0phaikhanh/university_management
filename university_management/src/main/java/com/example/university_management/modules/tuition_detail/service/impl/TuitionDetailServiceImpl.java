@@ -25,7 +25,7 @@ public class TuitionDetailServiceImpl implements TuitionDetailService {
     @Override
     public TuitionDetail getTuitionDetailById(Long id) {
         return detailRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy chi tiết học phí môn học với ID: " + id));
+                .orElseThrow(() -> new NotFoundException("Tuition detail not found with ID: " + id));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class TuitionDetailServiceImpl implements TuitionDetailService {
     @Override
     public TuitionDetail updateTuitionDetail(Long id, TuitionDetailRequestDTO dto) {
         TuitionDetail existing = detailRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy chi tiết học phí môn học để cập nhật!"));
+                .orElseThrow(() -> new NotFoundException("Tuition detail to update was not found!"));
 
         existing.setTuitionId(dto.getTuitionId());
         existing.setSubjectId(dto.getSubjectId());
@@ -55,7 +55,7 @@ public class TuitionDetailServiceImpl implements TuitionDetailService {
     @Override
     public void deleteTuitionDetail(Long id) {
         TuitionDetail existing = detailRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy chi tiết học phí môn học để xóa!"));
+                .orElseThrow(() -> new NotFoundException("Tuition detail to delete was not found!"));
         detailRepository.delete(existing);
     }
 }

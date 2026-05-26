@@ -13,28 +13,28 @@ import lombok.*;
 @Builder
 public class CourseClassRequestDTO {
 
-    @NotBlank(message = "Mã lớp học phần không được để trống")
-    @Size(max = 50, message = "Mã lớp học phần tối đa 50 ký tự")
+    @NotBlank(message = "Course class ID is required")
+    @Size(max = 50, message = "Course class ID must not exceed 50 characters")
     private String courseClassId;
 
-    @NotBlank(message = "Mã môn học không được để trống")
-    @Size(max = 50, message = "Mã môn học tối đa 50 ký tự")
+    @NotBlank(message = "Course ID is required")
+    @Size(max = 50, message = "Course ID must not exceed 50 characters")
     private String subjectId;
 
-    @NotBlank(message = "Mã học kỳ không được để trống")
-    @Size(max = 50, message = "Mã học kỳ tối đa 50 ký tự")
+    @NotBlank(message = "Semester ID is required")
+    @Size(max = 50, message = "Semester ID must not exceed 50 characters")
     private String semesterId;
 
-    @Size(max = 50, message = "Mã giảng viên tối đa 50 ký tự")
+    @Size(max = 50, message = "Lecturer ID must not exceed 50 characters")
     private String lecturerId;
 
-    @NotNull(message = "Sĩ số tối đa không được để trống")
-    @Min(value = 1, message = "Sĩ số tối đa phải lớn hơn 0")
+    @NotNull(message = "Maximum enrollment is required")
+    @Min(value = 1, message = "Maximum enrollment must be greater than 0")
     private Integer maxCapacity;
 
-    @Size(max = 255, message = "Lịch học tối đa 255 ký tự")
+    @Size(max = 255, message = "Schedule must not exceed 255 characters")
     private String schedule;
 
-    @Size(max = 50, message = "Phòng học tối đa 50 ký tự")
+    @Size(max = 50, message = "Classroom must not exceed 50 characters")
     private String room;
 }

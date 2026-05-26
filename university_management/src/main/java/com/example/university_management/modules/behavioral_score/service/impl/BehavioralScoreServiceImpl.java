@@ -25,15 +25,15 @@ public class BehavioralScoreServiceImpl implements BehavioralScoreService {
     @Override
     public BehavioralScore getScoreById(Long id) {
         return scoreRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy điểm rèn luyện với ID: " + id));
+                .orElseThrow(() -> new NotFoundException("Behavioral score not found with ID: " + id));
     }
 
     @Override
     public BehavioralScore createScore(BehavioralScoreRequestDTO dto) {
-        // Kiểm tra ràng buộc UNIQUE (student_id, semester_id)
+        // Validate UNIQUE constraint (student_id, semester_id)
         scoreRepository.findByStudentIdAndSemesterId(dto.getStudentId(), dto.getSemesterId())
                 .ifPresent(s -> {
-                    throw new RuntimeException("Điểm rèn luyện của sinh viên trong học kỳ này đã tồn tại!");
+                    throw new RuntimeException("Behavioral score for this student and semester already exists!");
                 });
 
         BehavioralScore score = BehavioralScore.builder()
@@ -49,7 +49,7 @@ public class BehavioralScoreServiceImpl implements BehavioralScoreService {
     @Override
     public BehavioralScore updateScore(Long id, BehavioralScoreRequestDTO dto) {
         BehavioralScore existing = scoreRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy điểm rèn luyện để cập nhật!"));
+                .orElseThrow(() -> new NotFoundException("Behavioral score to update was not found!"));
 
         existing.setStudentId(dto.getStudentId());
         existing.setSemesterId(dto.getSemesterId());
@@ -62,7 +62,7 @@ public class BehavioralScoreServiceImpl implements BehavioralScoreService {
     @Override
     public void deleteScore(Long id) {
         BehavioralScore existing = scoreRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy điểm rèn luyện để xóa!"));
+                .orElseThrow(() -> new NotFoundException("Behavioral score to delete was not found!"));
         scoreRepository.delete(existing);
     }
 }
