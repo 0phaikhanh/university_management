@@ -6,6 +6,8 @@ import com.example.university_management.modules.student.dto.StudentRequestDTO;
 import com.example.university_management.modules.student.entity.Student;
 import com.example.university_management.modules.student.repository.StudentRepository;
 import com.example.university_management.modules.student.service.StudentService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -20,8 +22,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> getAllStudents(){
-        return studentRepository.findAll();
+    public Page<Student> getAllStudents(Pageable pageable) {
+        return studentRepository.findAll(pageable);
     }
 
     @Override
