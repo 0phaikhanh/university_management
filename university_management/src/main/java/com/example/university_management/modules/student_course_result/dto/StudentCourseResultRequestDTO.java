@@ -10,37 +10,37 @@ import lombok.*;
 @Builder
 public class StudentCourseResultRequestDTO {
 
-    @NotBlank(message = "Mã sinh viên không được để trống")
-    @Size(max = 50, message = "Mã sinh viên tối đa 50 ký tự")
+    @NotBlank(message = "Student ID is required")
+    @Size(max = 50, message = "Student ID must not exceed 50 characters")
     private String studentId;
 
-    @NotBlank(message = "Mã lớp học phần không được để trống")
-    @Size(max = 50, message = "Mã lớp học phần tối đa 50 ký tự")
+    @NotBlank(message = "Course class ID is required")
+    @Size(max = 50, message = "Course class ID must not exceed 50 characters")
     private String courseClassId;
 
-    @Size(max = 50, message = "Loại đăng ký tối đa 50 ký tự")
+    @Size(max = 50, message = "Registration type must not exceed 50 characters")
     private String regType;
 
-    @Min(value = 0, message = "Điểm chuyên cần không được nhỏ hơn 0")
-    @Max(value = 10, message = "Điểm chuyên cần không được lớn hơn 10")
+    @Min(value = 0, message = "Attendance score must not be less than 0")
+    @Max(value = 10, message = "Attendance score must not be greater than 10")
     private Float attendanceScore;
 
-    @Min(value = 0, message = "Điểm giữa kỳ không được nhỏ hơn 0")
-    @Max(value = 10, message = "Điểm giữa kỳ không được lớn hơn 10")
+    @Min(value = 0, message = "Midterm score must not be less than 0")
+    @Max(value = 10, message = "Midterm score must not be greater than 10")
     private Float midtermScore;
 
-    @Min(value = 0, message = "Điểm cuối kỳ không được nhỏ hơn 0")
-    @Max(value = 10, message = "Điểm cuối kỳ không được lớn hơn 10")
+    @Min(value = 0, message = "Final exam score must not be less than 0")
+    @Max(value = 10, message = "Final exam score must not be greater than 10")
     private Float finalScore;
 
-    @Min(value = 0, message = "Điểm hệ 10 không được nhỏ hơn 0")
-    @Max(value = 10, message = "Điểm hệ 10 không được lớn hơn 10")
+    @Min(value = 0, message = "Score on 10-point scale must not be less than 0")
+    @Max(value = 10, message = "Score on 10-point scale must not be greater than 10")
     private Float total10;
 
-    @Min(value = 0, message = "Điểm hệ 4 không được nhỏ hơn 0")
-    @Max(value = 4, message = "Điểm hệ 4 không được lớn hơn 4")
+    @Min(value = 0, message = "Score on 4-point scale must not be less than 0")
+    @Max(value = 4, message = "Score on 4-point scale must not be greater than 4")
     private Float total4;
 
-    @Size(max = 5, message = "Điểm chữ tối đa 5 ký tự")
+    @Size(max = 5, message = "Letter grade must not exceed 5 characters")
     private String gradeLetter;
 }

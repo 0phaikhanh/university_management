@@ -9,16 +9,16 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class AdminClassRequestDTO {
-    @NotBlank(message = "Mã lớp không được để trống")
-    @Size(max = 50, message = "Mã lớp tối đa 50 ký tự")
+    @NotBlank(message = "Class ID is required")
+    @Size(max = 50, message = "Class ID must not exceed 50 characters")
     private String classId;
 
-    @NotBlank(message = "Mã ngành không được để trống")
-    @Size(max = 50, message = "Mã ngành tối đa 50 ký tự")
+    @NotBlank(message = "Major ID is required")
+    @Size(max = 50, message = "Major ID must not exceed 50 characters")
     private String majorId;
 
-    @NotNull(message = "Năm nhập học không được để trống")
-    @Min(value = 2000, message = "Năm nhập học phải từ năm 2000 trở đi")
-    @Max(value = 2026, message = "Năm nhập học không được vượt quá năm 2026")
+    @NotNull(message = "Admission year is required")
+    @Min(value = 2000, message = "Admission year must be 2000 or later")
+    @Max(value = 2026, message = "Admission year must not be greater than 2026")
     private Integer entranceYear;
 }

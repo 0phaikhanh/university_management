@@ -11,27 +11,27 @@ import java.math.BigDecimal;
 @Builder
 public class TuitionRequestDTO {
 
-    @NotBlank(message = "Mã sinh viên không được để trống")
-    @Size(max = 50, message = "Mã sinh viên tối đa 50 ký tự")
+    @NotBlank(message = "Student ID is required")
+    @Size(max = 50, message = "Student ID must not exceed 50 characters")
     private String studentId;
 
-    @NotBlank(message = "Mã học kỳ không được để trống")
-    @Size(max = 50, message = "Mã học kỳ tối đa 50 ký tự")
+    @NotBlank(message = "Semester ID is required")
+    @Size(max = 50, message = "Semester ID must not exceed 50 characters")
     private String semesterId;
 
-    @NotNull(message = "Tổng học phí không được để trống")
-    @DecimalMin(value = "0.0", message = "Tổng học phí không được âm")
+    @NotNull(message = "Total tuition is required")
+    @DecimalMin(value = "0.0", message = "Total tuition must not be negative")
     private BigDecimal totalFee;
 
-    @NotNull(message = "Số tiền miễn giảm không được để trống")
-    @DecimalMin(value = "0.0", message = "Số tiền miễn giảm không được âm")
+    @NotNull(message = "Discount amount is required")
+    @DecimalMin(value = "0.0", message = "Discount amount must not be negative")
     private BigDecimal discountAmount;
 
-    @NotNull(message = "Số tiền đã nộp không được để trống")
-    @DecimalMin(value = "0.0", message = "Số tiền đã nộp không được âm")
+    @NotNull(message = "Paid amount is required")
+    @DecimalMin(value = "0.0", message = "Paid amount must not be negative")
     private BigDecimal paidAmount;
 
-    @NotBlank(message = "Trạng thái đóng học phí không được để trống")
-    @Size(max = 50, message = "Trạng thái tối đa 50 ký tự")
+    @NotBlank(message = "Tuition payment status is required")
+    @Size(max = 50, message = "Status must not exceed 50 characters")
     private String status;
 }

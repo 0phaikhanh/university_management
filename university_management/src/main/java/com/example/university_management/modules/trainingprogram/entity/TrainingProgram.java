@@ -16,7 +16,7 @@ public class TrainingProgram {
     @Column(name = "program_id", length = 50)
     private String programId;
 
-    // LƯU Ý: Khóa ngoại liên kết lỏng, lưu dạng String
+    // NOTE: Loose foreign-key reference stored as String
     @Column(name = "major_id", length = 50)
     private String majorId;
 

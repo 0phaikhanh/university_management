@@ -26,15 +26,15 @@ public class StudentCourseResultServiceImpl implements StudentCourseResultServic
     @Override
     public StudentCourseResult getResultById(Long id) {
         return resultRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy kết quả học phần với ID: " + id));
+                .orElseThrow(() -> new NotFoundException("Student course result not found with ID: " + id));
     }
 
     @Override
     public StudentCourseResult createResult(StudentCourseResultRequestDTO dto) {
-        // Kiểm tra trùng ràng buộc UNIQUE (student_id, course_class_id)
+        // Check duplicate UNIQUE constraint (student_id, course_class_id)
         resultRepository.findByStudentIdAndCourseClassId(dto.getStudentId(), dto.getCourseClassId())
                 .ifPresent(r -> {
-                    throw new RuntimeException("Sinh viên đã có điểm trong lớp học phần này!");
+                    throw new RuntimeException("This student already has a result in this course class!");
                 });
 
         StudentCourseResult result = StudentCourseResult.builder()
@@ -55,7 +55,7 @@ public class StudentCourseResultServiceImpl implements StudentCourseResultServic
     @Override
     public StudentCourseResult updateResult(Long id, StudentCourseResultRequestDTO dto) {
         StudentCourseResult existing = resultRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy kết quả học phần để cập nhật!"));
+                .orElseThrow(() -> new NotFoundException("Student course result to update was not found!"));
 
         existing.setStudentId(dto.getStudentId());
         existing.setCourseClassId(dto.getCourseClassId());
@@ -73,7 +73,7 @@ public class StudentCourseResultServiceImpl implements StudentCourseResultServic
     @Override
     public void deleteResult(Long id) {
         StudentCourseResult existing = resultRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy kết quả học phần để xóa!"));
+                .orElseThrow(() -> new NotFoundException("Student course result to delete was not found!"));
         resultRepository.delete(existing);
     }
 }

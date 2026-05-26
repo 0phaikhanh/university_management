@@ -7,11 +7,11 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "student")
-@Getter                 // Tự động sinh tất cả các hàm get
-@Setter                 // Tự động sinh tất cả các hàm set
-@NoArgsConstructor      // Tự động sinh Constructor không tham số (bắt buộc cho JPA)
-@AllArgsConstructor     // Tự động sinh Constructor có đầy đủ tham số (tiện khi tạo nhanh đối tượng)
-@Builder                // Giúp tạo đối tượng theo Design Pattern Builder rất chuyên nghiệp
+@Getter                 // Generates all getter methods
+@Setter                 // Generates all setter methods
+@NoArgsConstructor      // Generates a no-arguments constructor required by JPA
+@AllArgsConstructor     // Generates an all-arguments constructor
+@Builder                // Enables object creation with the Builder design pattern
 public class Student {
 
     @Id

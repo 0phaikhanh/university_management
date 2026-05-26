@@ -1,4 +1,4 @@
-package com.example.university_management.modules.adminclass.service.impl;
+package com.example.university_management.modules.adminclass.service.Impl;
 
 import com.example.university_management.modules.adminclass.dto.AdminClassRequestDTO;
 import com.example.university_management.modules.adminclass.entity.AdminClass;
@@ -12,7 +12,7 @@ public class AdminClassServiceImpl implements AdminClassService {
 
     private final AdminClassRepository adminClassRepository;
 
-    // Chỉ cần inject duy nhất AdminClassRepository
+    // Only AdminClassRepository needs to be injected
     public AdminClassServiceImpl(AdminClassRepository adminClassRepository) {
         this.adminClassRepository = adminClassRepository;
     }
@@ -25,20 +25,20 @@ public class AdminClassServiceImpl implements AdminClassService {
     @Override
     public AdminClass getClassById(String id) {
         return adminClassRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy lớp hành chính với ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Admin class not found with ID: " + id));
     }
 
     @Override
     public AdminClass createClass(AdminClassRequestDTO dto) {
         if (adminClassRepository.existsById(dto.getClassId())) {
-            throw new RuntimeException("Mã lớp hành chính đã tồn tại!");
+            throw new RuntimeException("Admin class ID already exists!");
         }
 
-        // Nên check majorRepository.existsById ở đây
+        // Consider checking majorRepository.existsById here
 
         AdminClass adminClass = AdminClass.builder()
                 .classId(dto.getClassId())
-                .majorId(dto.getMajorId()) // Người dùng truyền lên chuỗi gì thì lưu chuỗi đó
+                .majorId(dto.getMajorId()) // Store the exact string provided by the user
                 .entranceYear(dto.getEntranceYear())
                 .build();
 
@@ -48,9 +48,9 @@ public class AdminClassServiceImpl implements AdminClassService {
     @Override
     public AdminClass updateClass(String id, AdminClassRequestDTO dto) {
         AdminClass existingClass = adminClassRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy lớp hành chính để cập nhật!"));
+                .orElseThrow(() -> new RuntimeException("Admin class to update was not found!"));
 
-        // Nên check majorRepository.existsById ở đây
+        // Consider checking majorRepository.existsById here
 
         existingClass.setMajorId(dto.getMajorId());
         existingClass.setEntranceYear(dto.getEntranceYear());
@@ -61,7 +61,7 @@ public class AdminClassServiceImpl implements AdminClassService {
     @Override
     public void deleteClass(String id) {
         AdminClass existingClass = adminClassRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy lớp hành chính để xóa!"));
+                .orElseThrow(() -> new RuntimeException("Admin class to delete was not found!"));
         adminClassRepository.delete(existingClass);
     }
 }

@@ -1,6 +1,6 @@
 package com.example.university_management.modules.tuition.controller;
 
-import com.example.university_management.modules.tuition.common.ApiResponse;
+import com.example.university_management.common.ApiResponse;
 import com.example.university_management.modules.tuition.dto.TuitionRequestDTO;
 import com.example.university_management.modules.tuition.entity.Tuition;
 import com.example.university_management.modules.tuition.service.TuitionService;
@@ -20,27 +20,27 @@ public class TuitionController {
 
     @GetMapping
     public ApiResponse<List<Tuition>> getAll() {
-        return new ApiResponse<>("Lấy danh sách học phí thành công", tuitionService.getAllTuitions());
+        return new ApiResponse<>("Tuition list retrieved successfully", tuitionService.getAllTuitions());
     }
 
     @GetMapping("/{id}")
     public ApiResponse<Tuition> getById(@PathVariable Long id) {
-        return new ApiResponse<>("Lấy thông tin học phí thành công", tuitionService.getTuitionById(id));
+        return new ApiResponse<>("Tuition retrieved successfully", tuitionService.getTuitionById(id));
     }
 
     @PostMapping
     public ApiResponse<Tuition> create(@Valid @RequestBody TuitionRequestDTO dto) {
-        return new ApiResponse<>("Khởi tạo học phí thành công", tuitionService.createTuition(dto));
+        return new ApiResponse<>("Tuition created successfully", tuitionService.createTuition(dto));
     }
 
     @PutMapping("/{id}")
     public ApiResponse<Tuition> update(@PathVariable Long id, @Valid @RequestBody TuitionRequestDTO dto) {
-        return new ApiResponse<>("Cập nhật học phí thành công", tuitionService.updateTuition(id, dto));
+        return new ApiResponse<>("Tuition updated successfully", tuitionService.updateTuition(id, dto));
     }
 
     @DeleteMapping("/{id}")
     public ApiResponse<String> delete(@PathVariable Long id) {
         tuitionService.deleteTuition(id);
-        return new ApiResponse<>("Xóa thông tin học phí thành công", null);
+        return new ApiResponse<>("Tuition deleted successfully", null);
     }
 }

@@ -11,18 +11,18 @@ import java.math.BigDecimal;
 @Builder
 public class TuitionDetailRequestDTO {
 
-    @NotNull(message = "Mã hóa đơn học phí (tuitionId) không được để trống")
+    @NotNull(message = "Tuition ID is required")
     private Long tuitionId;
 
-    @NotBlank(message = "Mã môn học không được để trống")
-    @Size(max = 50, message = "Mã môn học tối đa 50 ký tự")
+    @NotBlank(message = "Course ID is required")
+    @Size(max = 50, message = "Course ID must not exceed 50 characters")
     private String subjectId;
 
-    @NotNull(message = "Số tín chỉ không được để trống")
-    @Min(value = 1, message = "Số tín chỉ phải lớn hơn 0")
+    @NotNull(message = "Credit count is required")
+    @Min(value = 1, message = "Credit count must be greater than 0")
     private Integer credits;
 
-    @NotNull(message = "Số tiền của môn học không được để trống")
-    @DecimalMin(value = "0.0", message = "Số tiền không được nhỏ hơn 0")
+    @NotNull(message = "Course amount is required")
+    @DecimalMin(value = "0.0", message = "Amount must not be less than 0")
     private BigDecimal amount;
 }

@@ -25,15 +25,15 @@ public class TuitionServiceImpl implements TuitionService {
     @Override
     public Tuition getTuitionById(Long id) {
         return tuitionRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy thông tin học phí với ID: " + id));
+                .orElseThrow(() -> new NotFoundException("Tuition not found with ID: " + id));
     }
 
     @Override
     public Tuition createTuition(TuitionRequestDTO dto) {
-        // Kiểm tra trùng UNIQUE (student_id, semester_id)
+        // Check duplicate UNIQUE constraint (student_id, semester_id)
         tuitionRepository.findByStudentIdAndSemesterId(dto.getStudentId(), dto.getSemesterId())
                 .ifPresent(t -> {
-                    throw new RuntimeException("Học phí của sinh viên trong học kỳ này đã được khởi tạo!");
+                    throw new RuntimeException("Tuition for this student and semester has already been created!");
                 });
 
         Tuition tuition = Tuition.builder()
@@ -51,7 +51,7 @@ public class TuitionServiceImpl implements TuitionService {
     @Override
     public Tuition updateTuition(Long id, TuitionRequestDTO dto) {
         Tuition existing = tuitionRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy thông tin học phí để cập nhật!"));
+                .orElseThrow(() -> new NotFoundException("Tuition to update was not found!"));
 
         existing.setStudentId(dto.getStudentId());
         existing.setSemesterId(dto.getSemesterId());
@@ -66,7 +66,7 @@ public class TuitionServiceImpl implements TuitionService {
     @Override
     public void deleteTuition(Long id) {
         Tuition existing = tuitionRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy thông tin học phí để xóa!"));
+                .orElseThrow(() -> new NotFoundException("Tuition to delete was not found!"));
         tuitionRepository.delete(existing);
     }
 }
