@@ -31,3 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
+university_management/src/main/java/com/example/university_management/common/
