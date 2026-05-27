@@ -1,12 +1,15 @@
 package com.example.university_management.modules.behavioral_score.controller;
 
 import com.example.university_management.common.ApiResponse;
+import com.example.university_management.common.PageResponse;
+import com.example.university_management.common.PageableUtils;
 import com.example.university_management.modules.behavioral_score.dto.BehavioralScoreRequestDTO;
 import com.example.university_management.modules.behavioral_score.entity.BehavioralScore;
 import com.example.university_management.modules.behavioral_score.service.BehavioralScoreService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/behavioral-scores")
@@ -19,8 +22,14 @@ public class BehavioralScoreController {
     }
 
     @GetMapping
-    public ApiResponse<List<BehavioralScore>> getAll() {
-        return new ApiResponse<>("Behavioral scores retrieved successfully", scoreService.getAllScores());
+    public ApiResponse<PageResponse<BehavioralScore>> getAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "behavioralScoreId") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir) {
+        Pageable pageable = PageableUtils.create(page, size, sortBy, sortDir);
+        Page<BehavioralScore> scorePage = scoreService.getAllScores(pageable);
+        return new ApiResponse<>("Behavioral scores retrieved successfully", PageResponse.of(scorePage));
     }
 
     @GetMapping("/{id}")

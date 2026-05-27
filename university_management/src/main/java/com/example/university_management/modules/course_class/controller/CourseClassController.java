@@ -1,13 +1,15 @@
 package com.example.university_management.modules.course_class.controller;
 
 import com.example.university_management.common.ApiResponse;
+import com.example.university_management.common.PageResponse;
+import com.example.university_management.common.PageableUtils;
 import com.example.university_management.modules.course_class.dto.CourseClassRequestDTO;
 import com.example.university_management.modules.course_class.entity.CourseClass;
 import com.example.university_management.modules.course_class.service.CourseClassService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/course-classes")
@@ -20,8 +22,14 @@ public class CourseClassController {
     }
 
     @GetMapping
-    public ApiResponse<List<CourseClass>> getAll() {
-        return new ApiResponse<>("Course classes retrieved successfully", courseClassService.getAllCourseClasses());
+    public ApiResponse<PageResponse<CourseClass>> getAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "courseClassId") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir) {
+        Pageable pageable = PageableUtils.create(page, size, sortBy, sortDir);
+        Page<CourseClass> courseClassPage = courseClassService.getAllCourseClasses(pageable);
+        return new ApiResponse<>("Course classes retrieved successfully", PageResponse.of(courseClassPage));
     }
 
     @GetMapping("/{id}")

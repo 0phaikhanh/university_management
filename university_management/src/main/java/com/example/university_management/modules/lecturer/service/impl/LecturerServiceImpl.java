@@ -5,9 +5,9 @@ import com.example.university_management.modules.lecturer.dto.LecturerRequestDTO
 import com.example.university_management.modules.lecturer.entity.Lecturer;
 import com.example.university_management.modules.lecturer.repository.LecturerRepository;
 import com.example.university_management.modules.lecturer.service.LecturerService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class LecturerServiceImpl implements LecturerService {
@@ -19,8 +19,8 @@ public class LecturerServiceImpl implements LecturerService {
     }
 
     @Override
-    public List<Lecturer> getAllLecturers() {
-        return lecturerRepository.findAll();
+    public Page<Lecturer> getAllLecturers(Pageable pageable) {
+        return lecturerRepository.findAll(pageable);
     }
 
     @Override

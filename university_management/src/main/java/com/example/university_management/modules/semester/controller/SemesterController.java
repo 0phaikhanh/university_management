@@ -1,14 +1,16 @@
 package com.example.university_management.modules.semester.controller;
 
 import com.example.university_management.common.ApiResponse;
+import com.example.university_management.common.PageResponse;
+import com.example.university_management.common.PageableUtils;
 import com.example.university_management.modules.semester.dto.SemesterRequestDTO;
 import com.example.university_management.modules.semester.entity.Semester;
 import com.example.university_management.modules.semester.service.SemesterService;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/semesters")
@@ -21,8 +23,14 @@ public class SemesterController {
     }
 
     @GetMapping
-    public ApiResponse<List<Semester>> getAll() {
-        return new ApiResponse<>("Semesters retrieved successfully", semesterService.getAllSemesters());
+    public ApiResponse<PageResponse<Semester>> getAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "semesterId") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir) {
+        Pageable pageable = PageableUtils.create(page, size, sortBy, sortDir);
+        Page<Semester> semesterPage = semesterService.getAllSemesters(pageable);
+        return new ApiResponse<>("Semesters retrieved successfully", PageResponse.of(semesterPage));
     }
 
     @GetMapping("/{id}")

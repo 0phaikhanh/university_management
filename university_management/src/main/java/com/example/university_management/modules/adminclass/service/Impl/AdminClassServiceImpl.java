@@ -4,8 +4,9 @@ import com.example.university_management.modules.adminclass.dto.AdminClassReques
 import com.example.university_management.modules.adminclass.entity.AdminClass;
 import com.example.university_management.modules.adminclass.repository.AdminClassRepository;
 import com.example.university_management.modules.adminclass.service.AdminClassService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class AdminClassServiceImpl implements AdminClassService {
@@ -18,8 +19,8 @@ public class AdminClassServiceImpl implements AdminClassService {
     }
 
     @Override
-    public List<AdminClass> getAllClasses() {
-        return adminClassRepository.findAll();
+    public Page<AdminClass> getAllClasses(Pageable pageable) {
+        return adminClassRepository.findAll(pageable);
     }
 
     @Override

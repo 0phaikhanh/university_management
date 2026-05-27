@@ -2,11 +2,14 @@ package com.example.university_management.modules.student_course_result.controll
 
 import com.example.university_management.modules.student_course_result.Entity.StudentCourseResult;
 import com.example.university_management.common.ApiResponse;
+import com.example.university_management.common.PageResponse;
+import com.example.university_management.common.PageableUtils;
 import com.example.university_management.modules.student_course_result.dto.StudentCourseResultRequestDTO;
 import com.example.university_management.modules.student_course_result.service.StudentCourseResultService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/student-course-results")
@@ -19,8 +22,14 @@ public class StudentCourseResultController {
     }
 
     @GetMapping
-    public ApiResponse<List<StudentCourseResult>> getAll() {
-        return new ApiResponse<>("Student course results retrieved successfully", resultService.getAllResults());
+    public ApiResponse<PageResponse<StudentCourseResult>> getAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "resultId") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir) {
+        Pageable pageable = PageableUtils.create(page, size, sortBy, sortDir);
+        Page<StudentCourseResult> resultPage = resultService.getAllResults(pageable);
+        return new ApiResponse<>("Student course results retrieved successfully", PageResponse.of(resultPage));
     }
 
     @GetMapping("/{id}")

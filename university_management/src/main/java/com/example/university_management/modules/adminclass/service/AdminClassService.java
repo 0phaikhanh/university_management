@@ -1,10 +1,11 @@
 package com.example.university_management.modules.adminclass.service;
 import com.example.university_management.modules.adminclass.dto.AdminClassRequestDTO;
 import com.example.university_management.modules.adminclass.entity.AdminClass;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface AdminClassService {
-    List<AdminClass> getAllClasses();
+    Page<AdminClass> getAllClasses(Pageable pageable);
     AdminClass getClassById(String id);
     AdminClass createClass(AdminClassRequestDTO dto);
     AdminClass updateClass(String id, AdminClassRequestDTO dto);

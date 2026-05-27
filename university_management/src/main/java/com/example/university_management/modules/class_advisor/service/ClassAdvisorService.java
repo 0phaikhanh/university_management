@@ -2,11 +2,11 @@ package com.example.university_management.modules.class_advisor.service;
 
 import com.example.university_management.modules.class_advisor.dto.ClassAdvisorRequestDTO;
 import com.example.university_management.modules.class_advisor.entity.ClassAdvisor;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface ClassAdvisorService {
-    List<ClassAdvisor> getAllAdvisors();
+    Page<ClassAdvisor> getAllAdvisors(Pageable pageable);
     ClassAdvisor getAdvisorById(Long id);
     ClassAdvisor createAdvisor(ClassAdvisorRequestDTO dto);
     ClassAdvisor updateAdvisor(Long id, ClassAdvisorRequestDTO dto);

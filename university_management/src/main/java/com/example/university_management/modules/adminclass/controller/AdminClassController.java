@@ -4,9 +4,12 @@ import com.example.university_management.modules.adminclass.dto.AdminClassReques
 import com.example.university_management.modules.adminclass.entity.AdminClass;
 import com.example.university_management.modules.adminclass.service.AdminClassService;
 import com.example.university_management.common.ApiResponse;
+import com.example.university_management.common.PageResponse;
+import com.example.university_management.common.PageableUtils;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin-classes")
@@ -19,8 +22,14 @@ public class AdminClassController {
     }
 
     @GetMapping
-    public ApiResponse<List<AdminClass>> getAll() {
-        return new ApiResponse<>("Admin classes retrieved successfully", adminClassService.getAllClasses());
+    public ApiResponse<PageResponse<AdminClass>> getAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "classId") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir) {
+        Pageable pageable = PageableUtils.create(page, size, sortBy, sortDir);
+        Page<AdminClass> adminClassPage = adminClassService.getAllClasses(pageable);
+        return new ApiResponse<>("Admin classes retrieved successfully", PageResponse.of(adminClassPage));
     }
 
     @GetMapping("/{id}")

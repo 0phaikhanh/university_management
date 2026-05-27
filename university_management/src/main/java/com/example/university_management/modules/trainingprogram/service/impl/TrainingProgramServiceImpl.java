@@ -5,9 +5,9 @@ import com.example.university_management.modules.trainingprogram.dto.TrainingPro
 import com.example.university_management.modules.trainingprogram.entity.TrainingProgram;
 import com.example.university_management.modules.trainingprogram.repository.TrainingProgramRepository;
 import com.example.university_management.modules.trainingprogram.service.TrainingProgramService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class
@@ -20,8 +20,8 @@ TrainingProgramServiceImpl implements TrainingProgramService {
     }
 
     @Override
-    public List<TrainingProgram> getAllPrograms() {
-        return trainingProgramRepository.findAll();
+    public Page<TrainingProgram> getAllPrograms(Pageable pageable) {
+        return trainingProgramRepository.findAll(pageable);
     }
 
     @Override
