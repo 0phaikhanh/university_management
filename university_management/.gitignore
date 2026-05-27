@@ -31,4 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
-application.yaml
+src/main/resources/application.yaml
+src/main/java/com/example/university_management/common/
+src/main/java/com/example/university_management/modules/faculty/
