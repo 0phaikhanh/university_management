@@ -43,7 +43,7 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
-		<!-- SWAGGER (Spring Boot 3.x chuẩn) -->
+		<!-- SWAGGER (Spring Boot 3.x standard) -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
