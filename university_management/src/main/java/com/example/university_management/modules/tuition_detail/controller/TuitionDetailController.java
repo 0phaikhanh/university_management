@@ -1,12 +1,15 @@
 package com.example.university_management.modules.tuition_detail.controller;
 
 import com.example.university_management.common.ApiResponse;
+import com.example.university_management.common.PageResponse;
+import com.example.university_management.common.PageableUtils;
 import com.example.university_management.modules.tuition_detail.dto.TuitionDetailRequestDTO;
 import com.example.university_management.modules.tuition_detail.entity.TuitionDetail;
 import com.example.university_management.modules.tuition_detail.service.TuitionDetailService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/tuition-details")
@@ -19,8 +22,14 @@ public class TuitionDetailController {
     }
 
     @GetMapping
-    public ApiResponse<List<TuitionDetail>> getAll() {
-        return new ApiResponse<>("Tuition details retrieved successfully", detailService.getAllTuitionDetails());
+    public ApiResponse<PageResponse<TuitionDetail>> getAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "tuitionDetailId") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir) {
+        Pageable pageable = PageableUtils.create(page, size, sortBy, sortDir);
+        Page<TuitionDetail> detailPage = detailService.getAllTuitionDetails(pageable);
+        return new ApiResponse<>("Tuition details retrieved successfully", PageResponse.of(detailPage));
     }
 
     @GetMapping("/{id}")

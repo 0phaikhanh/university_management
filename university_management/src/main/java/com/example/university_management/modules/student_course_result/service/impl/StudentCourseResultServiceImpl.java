@@ -5,9 +5,9 @@ import com.example.university_management.modules.student_course_result.Entity.St
 import com.example.university_management.modules.student_course_result.dto.StudentCourseResultRequestDTO;
 import com.example.university_management.modules.student_course_result.repository.StudentCourseResultRepository;
 import com.example.university_management.modules.student_course_result.service.StudentCourseResultService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class StudentCourseResultServiceImpl implements StudentCourseResultService {
@@ -19,8 +19,8 @@ public class StudentCourseResultServiceImpl implements StudentCourseResultServic
     }
 
     @Override
-    public List<StudentCourseResult> getAllResults() {
-        return resultRepository.findAll();
+    public Page<StudentCourseResult> getAllResults(Pageable pageable) {
+        return resultRepository.findAll(pageable);
     }
 
     @Override

@@ -5,8 +5,9 @@ import com.example.university_management.modules.behavioral_score.dto.Behavioral
 import com.example.university_management.modules.behavioral_score.entity.BehavioralScore;
 import com.example.university_management.modules.behavioral_score.repository.BehavioralScoreRepository;
 import com.example.university_management.modules.behavioral_score.service.BehavioralScoreService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class BehavioralScoreServiceImpl implements BehavioralScoreService {
@@ -18,8 +19,8 @@ public class BehavioralScoreServiceImpl implements BehavioralScoreService {
     }
 
     @Override
-    public List<BehavioralScore> getAllScores() {
-        return scoreRepository.findAll();
+    public Page<BehavioralScore> getAllScores(Pageable pageable) {
+        return scoreRepository.findAll(pageable);
     }
 
     @Override

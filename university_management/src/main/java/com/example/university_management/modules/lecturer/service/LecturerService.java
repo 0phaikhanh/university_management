@@ -2,12 +2,12 @@ package com.example.university_management.modules.lecturer.service;
 
 import com.example.university_management.modules.lecturer.dto.LecturerRequestDTO;
 import com.example.university_management.modules.lecturer.entity.Lecturer;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface LecturerService {
 
-    List<Lecturer> getAllLecturers();
+    Page<Lecturer> getAllLecturers(Pageable pageable);
 
     Lecturer getLecturerById(String id);
 

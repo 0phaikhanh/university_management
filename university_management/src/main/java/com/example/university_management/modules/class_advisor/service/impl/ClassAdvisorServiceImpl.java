@@ -5,9 +5,9 @@ import com.example.university_management.modules.class_advisor.dto.ClassAdvisorR
 import com.example.university_management.modules.class_advisor.entity.ClassAdvisor;
 import com.example.university_management.modules.class_advisor.repository.ClassAdvisorRepository;
 import com.example.university_management.modules.class_advisor.service.ClassAdvisorService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ClassAdvisorServiceImpl implements ClassAdvisorService {
@@ -18,8 +18,8 @@ public class ClassAdvisorServiceImpl implements ClassAdvisorService {
     }
 
     @Override
-    public List<ClassAdvisor> getAllAdvisors() {
-        return classAdvisorRepository.findAll();
+    public Page<ClassAdvisor> getAllAdvisors(Pageable pageable) {
+        return classAdvisorRepository.findAll(pageable);
     }
 
     @Override

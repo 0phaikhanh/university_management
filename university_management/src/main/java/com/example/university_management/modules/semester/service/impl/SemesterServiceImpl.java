@@ -4,9 +4,9 @@ import com.example.university_management.modules.semester.dto.SemesterRequestDTO
 import com.example.university_management.modules.semester.entity.Semester;
 import com.example.university_management.modules.semester.repository.SemesterRepository;
 import com.example.university_management.modules.semester.service.SemesterService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class SemesterServiceImpl implements SemesterService {
@@ -18,8 +18,8 @@ public class SemesterServiceImpl implements SemesterService {
     }
 
     @Override
-    public List<Semester> getAllSemesters() {
-        return semesterRepository.findAll();
+    public Page<Semester> getAllSemesters(Pageable pageable) {
+        return semesterRepository.findAll(pageable);
     }
 
     @Override

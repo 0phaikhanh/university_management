@@ -2,10 +2,11 @@ package com.example.university_management.modules.tuition.service;
 
 import com.example.university_management.modules.tuition.dto.TuitionRequestDTO;
 import com.example.university_management.modules.tuition.entity.Tuition;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface TuitionService {
-    List<Tuition> getAllTuitions();
+    Page<Tuition> getAllTuitions(Pageable pageable);
     Tuition getTuitionById(Long id);
     Tuition createTuition(TuitionRequestDTO dto);
     Tuition updateTuition(Long id, TuitionRequestDTO dto);

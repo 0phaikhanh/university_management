@@ -1,16 +1,18 @@
 package com.example.university_management.modules.faculty.controller;
 
+import com.example.university_management.common.PageResponse;
+import com.example.university_management.common.PageableUtils;
 import com.example.university_management.modules.faculty.dto.request.CreateFacultyRequest;
 import com.example.university_management.modules.faculty.dto.request.UpdateFacultyRequest;
 import com.example.university_management.modules.faculty.dto.response.FacultyResponse;
 import com.example.university_management.modules.faculty.service.FacultyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/faculties")
@@ -38,10 +40,17 @@ public class FacultyController {
     }
 
     @GetMapping
-    public ResponseEntity<List<FacultyResponse>> getAll() {
+    public ResponseEntity<PageResponse<FacultyResponse>> getAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "facultyId") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir
+    ) {
+        Pageable pageable = PageableUtils.create(page, size, sortBy, sortDir);
+        Page<FacultyResponse> facultyPage = facultyService.getAll(pageable);
 
         return ResponseEntity.ok(
-                facultyService.getAll()
+                PageResponse.of(facultyPage)
         );
     }
 

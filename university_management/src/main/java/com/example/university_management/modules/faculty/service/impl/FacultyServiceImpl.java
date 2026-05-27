@@ -8,10 +8,10 @@ import com.example.university_management.modules.faculty.mapper.FacultyMapper;
 import com.example.university_management.modules.faculty.repository.FacultyRepository;
 import com.example.university_management.modules.faculty.service.FacultyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -70,12 +70,10 @@ public class FacultyServiceImpl implements FacultyService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<FacultyResponse> getAll() {
+    public Page<FacultyResponse> getAll(Pageable pageable) {
 
-        return facultyRepository.findAll()
-                .stream()
-                .map(facultyMapper::toResponse)
-                .toList();
+        return facultyRepository.findAll(pageable)
+                .map(facultyMapper::toResponse);
     }
 
     @Override

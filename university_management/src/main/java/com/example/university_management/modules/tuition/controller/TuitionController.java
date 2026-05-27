@@ -1,12 +1,15 @@
 package com.example.university_management.modules.tuition.controller;
 
 import com.example.university_management.common.ApiResponse;
+import com.example.university_management.common.PageResponse;
+import com.example.university_management.common.PageableUtils;
 import com.example.university_management.modules.tuition.dto.TuitionRequestDTO;
 import com.example.university_management.modules.tuition.entity.Tuition;
 import com.example.university_management.modules.tuition.service.TuitionService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/tuitions")
@@ -19,8 +22,14 @@ public class TuitionController {
     }
 
     @GetMapping
-    public ApiResponse<List<Tuition>> getAll() {
-        return new ApiResponse<>("Tuition list retrieved successfully", tuitionService.getAllTuitions());
+    public ApiResponse<PageResponse<Tuition>> getAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "tuitionId") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir) {
+        Pageable pageable = PageableUtils.create(page, size, sortBy, sortDir);
+        Page<Tuition> tuitionPage = tuitionService.getAllTuitions(pageable);
+        return new ApiResponse<>("Tuition list retrieved successfully", PageResponse.of(tuitionPage));
     }
 
     @GetMapping("/{id}")

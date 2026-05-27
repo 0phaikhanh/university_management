@@ -5,8 +5,9 @@ import com.example.university_management.modules.tuition.dto.TuitionRequestDTO;
 import com.example.university_management.modules.tuition.entity.Tuition;
 import com.example.university_management.modules.tuition.repository.TuitionRepository;
 import com.example.university_management.modules.tuition.service.TuitionService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class TuitionServiceImpl implements TuitionService {
@@ -18,8 +19,8 @@ public class TuitionServiceImpl implements TuitionService {
     }
 
     @Override
-    public List<Tuition> getAllTuitions() {
-        return tuitionRepository.findAll();
+    public Page<Tuition> getAllTuitions(Pageable pageable) {
+        return tuitionRepository.findAll(pageable);
     }
 
     @Override

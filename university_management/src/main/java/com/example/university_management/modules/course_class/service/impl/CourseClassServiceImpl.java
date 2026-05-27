@@ -5,9 +5,9 @@ import com.example.university_management.modules.course_class.dto.CourseClassReq
 import com.example.university_management.modules.course_class.entity.CourseClass;
 import com.example.university_management.modules.course_class.repository.CourseClassRepository;
 import com.example.university_management.modules.course_class.service.CourseClassService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class CourseClassServiceImpl implements CourseClassService {
@@ -18,8 +18,8 @@ public class CourseClassServiceImpl implements CourseClassService {
     }
 
     @Override
-    public List<CourseClass> getAllCourseClasses() {
-        return courseClassRepository.findAll();
+    public Page<CourseClass> getAllCourseClasses(Pageable pageable) {
+        return courseClassRepository.findAll(pageable);
     }
 
     @Override

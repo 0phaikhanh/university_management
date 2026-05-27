@@ -1,12 +1,15 @@
 package com.example.university_management.modules.class_advisor.controller;
 
 import com.example.university_management.common.ApiResponse;
+import com.example.university_management.common.PageResponse;
+import com.example.university_management.common.PageableUtils;
 import com.example.university_management.modules.class_advisor.dto.ClassAdvisorRequestDTO;
 import com.example.university_management.modules.class_advisor.entity.ClassAdvisor;
 import com.example.university_management.modules.class_advisor.service.ClassAdvisorService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/class-advisors")
@@ -19,8 +22,14 @@ public class ClassAdvisorController {
     }
 
     @GetMapping
-    public ApiResponse<List<ClassAdvisor>> getAll() {
-        return new ApiResponse<>("Class advisors retrieved successfully", classAdvisorService.getAllAdvisors());
+    public ApiResponse<PageResponse<ClassAdvisor>> getAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "advisorId") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir) {
+        Pageable pageable = PageableUtils.create(page, size, sortBy, sortDir);
+        Page<ClassAdvisor> advisorPage = classAdvisorService.getAllAdvisors(pageable);
+        return new ApiResponse<>("Class advisors retrieved successfully", PageResponse.of(advisorPage));
     }
 
     @GetMapping("/{id}")
