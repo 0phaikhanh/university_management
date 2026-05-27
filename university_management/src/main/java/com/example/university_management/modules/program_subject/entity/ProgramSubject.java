@@ -15,11 +15,6 @@ public class ProgramSubject {
     @EmbeddedId
     private ProgramSubjectId id;
 
-//    @ManyToOne
-//    @MapsId("subjectId")
-//    @JoinColumn(name = "subject_id")
-//    private Subject subject;
-
     @Column(name = "is_mandatory")
     private Integer isMandatory;
 
