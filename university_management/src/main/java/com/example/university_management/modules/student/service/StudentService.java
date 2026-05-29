@@ -6,7 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface StudentService {
-    Page<Student> getAllStudents(Pageable pageable);    Student getStudentById(String id);
+    Page<Student> getAllStudents(Pageable pageable);
+    Student getStudentById(String id);
     Student createStudent (StudentRequestDTO dto);
     Student updateStudent (String id, StudentRequestDTO dto);
     void deleteStudent(String id);

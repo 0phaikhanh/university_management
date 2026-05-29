@@ -31,6 +31,7 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
     }
 
+    //todo : transactional
     @Override
     public Student createStudent(StudentRequestDTO dto) {
         if (studentRepository.existsById(dto.getStudentId())) {
